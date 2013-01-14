@@ -11,7 +11,9 @@ private:
 	sf::Time m_ElapsedTime;
 	sf::Texture m_BackgroundTex;
 	sf::Sprite m_Background;
-	int m_FPS;
+	sf::Font m_Font;
+	sf::Text m_FPS;
+	float m_FPSTimer;
 
 	GameStateManager *m_GSManager;
 	GameState *m_ActiveState;

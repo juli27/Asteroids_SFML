@@ -1,16 +1,21 @@
 #include "Asteroids.hpp"
 #include <iostream>
+#include <sstream>
 
 Asteroids::Asteroids()
 	: m_ActiveState(NULL),
-	  m_ActiveStateID(GSID_FIX)
+	  m_ActiveStateID(GSID_FIX),
+	  m_FPSTimer(0.0f)
 {
 	m_Window = new sf::RenderWindow(sf::VideoMode(800, 600), "Asteroids");
 
 	m_BackgroundTex.loadFromFile("data/Background.bmp");
 	m_Background.setTexture(m_BackgroundTex);
 	
-	m_FPS = 0;
+	m_Font.loadFromFile("data/AGENCYR.TTF");
+
+	m_FPS.setString("");
+	m_FPS.setFont(m_Font);
 
 	m_GSManager = new GameStateManager();
 }
@@ -71,13 +76,26 @@ bool Asteroids::Run()
 		}
 		//
 
-		m_FPS = static_cast<int> (1.f / m_ElapsedTime.asSeconds());
+		int FPS = static_cast<int> (1.0f / m_ElapsedTime.asSeconds());
+		
+		m_FPSTimer += m_ElapsedTime.asSeconds();
+		if (m_FPSTimer >= 0.5f)
+		{
+			std::string FPSstr;
+			std::ostringstream convert;
+			convert << FPS << " FPS";
+			FPSstr = convert.str();
+			sf::String str(FPSstr);
+			
+			m_FPS.setString(str);
 
-		std::cout << m_FPS << std::endl;
+			m_FPSTimer = 0.0f;
+		}
 
 		m_ActiveState->Render(m_ElapsedTime);
 		m_ActiveState->Update(m_ElapsedTime);
 
+		m_Window->draw(m_FPS);
 		m_Window->display();
 	}
 	//
