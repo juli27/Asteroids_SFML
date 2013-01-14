@@ -22,7 +22,7 @@ Asteroid::~Asteroid()
 
 void Asteroid::Update(sf::Time Time)
 {
-	m_Position.y += 50.0f * Time.asSeconds();
+	m_Position.y += 200.0f * Time.asSeconds();
 	m_CollisionRect.top = static_cast<int> (m_Position.y);
 
 	m_AsteroidAnimPhase += 10.0f * Time.asSeconds();

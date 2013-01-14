@@ -98,5 +98,5 @@ Desktop.ini
 
 Animation_old.hpp
 Animation_old.cpp
-.gitignore
-.gitattributes
+data/gui/
+SFML_Game.exe

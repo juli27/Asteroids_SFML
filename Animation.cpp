@@ -1,27 +1,26 @@
 #include "Animation.hpp"
 
-Animation::Animation(const std::string Filename, int Frames, int FrameWidth, int FrameY, sf::RenderWindow *Window)
-	: m_Window(Window),
-	  m_FrameX(FrameWidth),
-	  m_FrameY(FrameY),
-	  m_Frames(Frames)
+Animation::Animation(const std::string Filename, int Frames, int FrameWidth, int FrameHeight, sf::RenderWindow *Window)
+	: m_Window(Window)
 {
-	m_AnimImg.loadFromFile(Filename);
-	m_AnimImg.createMaskFromColor(sf::Color(255, 0, 255));
+	sf::Image AnimImg;
+	AnimImg.loadFromFile(Filename);
+	AnimImg.createMaskFromColor(sf::Color(255, 0, 255));
 	m_FrameRect.width = FrameWidth;
-	m_FrameRect.height = FrameY;
-	m_FramesX = m_AnimImg.getSize().x / m_FrameX;
+	m_FrameRect.height = FrameHeight;
+
+	int FramesX = AnimImg.getSize().x / FrameWidth;
 
 	for (int i = 0; i < Frames; ++i)
 	{
-		int Colomn = i % m_FramesX;
-		int Row = i / m_FramesX;
+		int Colomn = i % FramesX;
+		int Row = i / FramesX;
 
-		m_FrameRect.left = Colomn * m_FrameX;
-		m_FrameRect.top = Row * m_FrameY;
-		m_AnimPhaseTex = new sf::Texture();
+		m_FrameRect.left = Colomn * FrameWidth;
+		m_FrameRect.top = Row * FrameHeight;
+		m_AnimPhaseTex = new sf::Texture;
 
-		m_AnimPhaseTex->loadFromImage(m_AnimImg, m_FrameRect);
+		m_AnimPhaseTex->loadFromImage(AnimImg, m_FrameRect);
 		m_AnimationTextures.push_back(m_AnimPhaseTex);
 
 		sf::Sprite sprite(*m_AnimPhaseTex);
