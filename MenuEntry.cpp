@@ -16,7 +16,7 @@ MenuEntry::~MenuEntry()
 {
 }
 
-bool MenuEntry::isActive()
+bool MenuEntry::isActive() const
 {
 	return m_Active;
 }
@@ -26,16 +26,9 @@ void MenuEntry::setActive()
 	this->m_Active = true;
 }
 
-sf::Vector2f MenuEntry::getPosition()
+sf::Vector2f MenuEntry::getPosition() const
 {
 	return m_Entry.getPosition();
-}
-
-
-
-void MenuEntry::Update(sf::Time Time)
-{
-
 }
 
 void MenuEntry::Render(sf::Time Time, sf::RenderWindow *Window)

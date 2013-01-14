@@ -36,7 +36,7 @@ void Shot::Render()
 	}
 }
 
-bool Shot::isAlive()
+bool Shot::isAlive() const
 {
 	return m_Alive;
 }
@@ -46,7 +46,7 @@ void Shot::setAlive(bool Alive)
 	m_Alive = Alive;
 }
 
-sf::IntRect Shot::getRect()
+sf::IntRect Shot::getRect() const
 {
 	return m_CollisionRect;
 }

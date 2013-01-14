@@ -14,7 +14,7 @@ void GameStateManager::setState(GameStateID ID)
 	m_ActiveStateID = ID;
 }
 
-GameStateID GameStateManager::getActiveStateID()
+GameStateID GameStateManager::getActiveStateID() const
 {
 	return m_ActiveStateID;
 }

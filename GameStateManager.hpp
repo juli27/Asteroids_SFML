@@ -10,5 +10,5 @@ public:
 	GameStateManager();
 	~GameStateManager();
 	void setState(GameStateID ID);
-	GameStateID getActiveStateID();
+	GameStateID getActiveStateID() const;
 };

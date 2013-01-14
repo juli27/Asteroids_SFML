@@ -105,3 +105,8 @@ void Player::CheckPosition()
 	else if (m_PlayerAnimPhase > 10.0f)
 		m_PlayerAnimPhase = 10.0f;
 }
+
+std::list<Shot> *Player::getShotList()
+{
+	return &m_ShotList;
+}

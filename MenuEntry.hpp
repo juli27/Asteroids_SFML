@@ -13,9 +13,8 @@ private:
 public:
 	MenuEntry(sf::String Text, float x, float y);
 	~MenuEntry();
-	bool isActive();
+	bool isActive() const;
 	void setActive();
-	sf::Vector2f getPosition();
-	void Update(sf::Time Time);
+	sf::Vector2f getPosition() const;
 	void Render(sf::Time Time, sf::RenderWindow *Window);
 };

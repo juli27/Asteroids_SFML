@@ -73,7 +73,7 @@ bool Asteroids::Run()
 
 		m_FPS = static_cast<int> (1.f / m_ElapsedTime.asSeconds());
 
-		// std::cout << m_FPS << std::endl;
+		std::cout << m_FPS << std::endl;
 
 		m_ActiveState->Render(m_ElapsedTime);
 		m_ActiveState->Update(m_ElapsedTime);
