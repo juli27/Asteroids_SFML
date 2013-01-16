@@ -107,3 +107,8 @@ std::list<Shot> *Player::getShotList()
 {
 	return &m_ShotList;
 }
+
+sf::IntRect Player::getCollisionRect() const
+{
+	return m_Player->getCollisionRect();
+}

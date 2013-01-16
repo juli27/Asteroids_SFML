@@ -18,5 +18,5 @@ public:
 	void Render();
 	bool isAlive() const;
 	void setAlive(bool Alive);
-	sf::IntRect getRect() const;
+	sf::IntRect getCollisionRect() const;
 };

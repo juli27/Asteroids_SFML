@@ -46,7 +46,7 @@ void Shot::setAlive(bool Alive)
 	m_Alive = Alive;
 }
 
-sf::IntRect Shot::getRect() const
+sf::IntRect Shot::getCollisionRect() const
 {
 	return m_CollisionRect;
 }

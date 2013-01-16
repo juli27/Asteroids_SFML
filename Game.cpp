@@ -17,7 +17,45 @@ Game::~Game()
 	delete m_Asteroid;
 }
 
-void Game::SpawnAsteroids(sf::Time Time)
+void Game::CheckCollisions()
+{
+	std::list<Shot> *ShotList = m_Player->getShotList();
+
+	std::list<Asteroid>::iterator AsteroidIt = m_Asteroids.begin();
+	std::list<Shot>::iterator ShotIt;
+
+	sf::IntRect AsteroidRect;
+	sf::IntRect ShotRect;
+	sf::IntRect PlayerRect = m_Player->getCollisionRect();
+
+	while (AsteroidIt != m_Asteroids.end())
+	{
+		AsteroidRect = AsteroidIt->getCollisionRect();
+
+		for (ShotIt = ShotList->begin(); ShotIt != ShotList->end(); ++ShotIt)
+		{
+			ShotRect = ShotIt->getCollisionRect();
+
+			if (ShotRect.intersects(AsteroidRect))
+			{
+				AsteroidIt->setAlive(false);
+				ShotIt->setAlive(false);
+			}
+		}
+
+		if (PlayerRect.intersects(AsteroidRect))
+		{
+			m_GSM->setState(GSID_MAINMENU);
+		}
+
+		if (AsteroidIt->isAlive())
+			AsteroidIt++;
+		else
+			AsteroidIt = m_Asteroids.erase(AsteroidIt);
+	}
+}
+
+void Game::UpdateAsteroids(sf::Time Time)
 {
 	m_AsteroidTimer += Time.asSeconds();
 
@@ -29,42 +67,15 @@ void Game::SpawnAsteroids(sf::Time Time)
 
 		m_AsteroidTimer = 0.0f;
 	}
-}
-
-void Game::CheckCollisions()
-{
-	std::list<Shot> *ShotList = m_Player->getShotList();
-
-	std::list<Asteroid>::iterator AsteroidIt = m_Asteroids.begin();
-	std::list<Shot>::iterator ShotIt;
-
-	sf::IntRect AsteroidRect;
-	sf::IntRect ShotRect;
-
-	while (AsteroidIt != m_Asteroids.end())
+	
+	std::list<Asteroid>::iterator It;
+	for (It = m_Asteroids.begin(); It != m_Asteroids.end(); ++It)
 	{
-		AsteroidRect = AsteroidIt->getCollisionRect();
-
-		for (ShotIt = ShotList->begin(); ShotIt != ShotList->end(); ++ShotIt)
-		{
-			ShotRect = ShotIt->getRect();
-
-			if (ShotRect.top < AsteroidRect.top + AsteroidRect.height &&
-				ShotRect.top + ShotRect.height > AsteroidRect.top &&
-				ShotRect.left < AsteroidRect.left + AsteroidRect.width &&
-				ShotRect.left + ShotRect.width > AsteroidRect.left)
-			{
-				AsteroidIt->setAlive(false);
-				ShotIt->setAlive(false);
-			}
-		}
-
-		if (AsteroidIt->isAlive())
-			AsteroidIt++;
-		else
-			AsteroidIt = m_Asteroids.erase(AsteroidIt);
+		It->Update(Time);
 	}
+
 }
+
 void Game::RenderAsteroids(sf::Time Time)
 {
 	std::list<Asteroid>::iterator It;
@@ -72,14 +83,13 @@ void Game::RenderAsteroids(sf::Time Time)
 	for (It = m_Asteroids.begin(); It != m_Asteroids.end(); ++It)
 	{
 		It->Render();
-		It->Update(Time);
 	}
 }
 
 void Game::Update(sf::Time Time)
 {
 	m_Player->Update(Time);
-	SpawnAsteroids(Time);
+	UpdateAsteroids(Time);
 	CheckCollisions();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))

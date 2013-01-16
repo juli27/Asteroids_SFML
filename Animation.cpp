@@ -23,17 +23,13 @@ Animation::Animation(const std::string Filename, int Frames, int FrameWidth, int
     }
 }
 
-Animation::Animation()
-{
-}
-
 Animation::~Animation()
 {
 }
 
-sf::FloatRect Animation::getCollisionRect() const
+sf::IntRect Animation::getCollisionRect() const
 {
-	return m_AnimPhase.getGlobalBounds();
+	return sf::IntRect(static_cast<int> (m_Position.x), static_cast<int> (m_Position.y), m_FrameRect.width, m_FrameRect.height);
 }
 
 void Animation::setPosition(float x, float y)
@@ -46,6 +42,8 @@ void Animation::setPosition(sf::Vector2f Position)
 {
 	m_Position = Position;
 }
+
+
 
 void Animation::Render(float FrameNumber)
 {

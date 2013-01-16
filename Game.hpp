@@ -16,12 +16,13 @@ private:
 	std::list<Asteroid> m_Asteroids;
 	float m_AsteroidTimer;
 
+	void UpdateAsteroids(sf::Time Time);
+	void RenderAsteroids(sf::Time Time);
+	void CheckCollisions();
+
 public:
 	Game(sf::RenderWindow *Window, GameStateManager *GSM, sf::Sprite &Background);
 	~Game();
-	void SpawnAsteroids(sf::Time Time);
-	void CheckCollisions();
-	void RenderAsteroids(sf::Time Time);
 	void Update(sf::Time Time);
 	void Render(sf::Time Time);
 };

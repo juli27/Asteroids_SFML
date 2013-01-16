@@ -27,4 +27,5 @@ public:
 	void Update(sf::Time Time);
 	void Render(sf::Time Time);
 	std::list<Shot> *getShotList();
+	sf::IntRect getCollisionRect() const;
 };

@@ -10,7 +10,7 @@ Asteroid::Asteroid(Animation *Asteroid, sf::Vector2f Position)
 
 	m_CollisionRect.left = static_cast<int> (m_Position.x);
 	m_CollisionRect.top = static_cast<int> (m_Position.y);
-	m_CollisionRect.width = static_cast<int>(m_Asteroid->getCollisionRect().width);
+	m_CollisionRect.width = static_cast<int> (m_Asteroid->getCollisionRect().width);
 	m_CollisionRect.height = static_cast<int> (m_Asteroid->getCollisionRect().height);
 
 	m_Alive = true;

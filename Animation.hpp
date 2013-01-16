@@ -14,10 +14,10 @@ private:
 
 public:
 	Animation(const std::string Filename, int Frames, int FrameWidth, int FrameY, sf::RenderWindow *Window);
-	Animation();
 	~Animation();
-	sf::FloatRect getCollisionRect() const;
+	sf::IntRect getCollisionRect() const;
 	void setPosition(float x, float y);
 	void setPosition(sf::Vector2f Position);
+	void Update();
 	void Render(float FrameNumber);
 };
