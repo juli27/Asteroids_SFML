@@ -95,8 +95,9 @@ Thumbs.db
 # Folder config file
 Desktop.ini
 
-
-Animation_old.hpp
-Animation_old.cpp
 data/gui/
 SFML_Game.exe
+Animation_old.hpp
+Animation_old.cpp
+
+
