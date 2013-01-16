@@ -8,7 +8,7 @@ MainMenu::MainMenu(sf::RenderWindow *Window, GameStateManager *GSM, sf::Sprite &
 	  m_Background(Background),
 	  m_GSM(GSM)
 {
-	m_Cursor = new Animation("data/Asteroid.bmp", 20, 64, 64, m_Window);
+	m_Cursor = new Animation("data/Asteroid.png", 20, 64, 64, m_Window);
 
 	MenuEntry *Entry;
 

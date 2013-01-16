@@ -6,7 +6,7 @@ Game::Game(sf::RenderWindow *Window, GameStateManager *GSM, sf::Sprite &Backgrou
 	  m_GSM(GSM)
 {
 	m_Player = new Player(m_Window);
-	m_Asteroid = new Animation("data/Asteroid.bmp", 20, 64, 64, m_Window);
+	m_Asteroid = new Animation("data/Asteroid.png", 20, 64, 64, m_Window);
 
 	m_AsteroidTimer = 0.0f;
 }

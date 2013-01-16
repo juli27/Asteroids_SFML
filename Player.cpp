@@ -3,13 +3,10 @@
 Player::Player(sf::RenderWindow *Window)
 	: m_Window(Window)
 {
-	m_Player = new Animation("data/Player.bmp", 11, 64, 64, m_Window);
+	m_Player = new Animation("data/Player.png", 11, 64, 64, m_Window);
 	
-	sf::Image img;
-	img.loadFromFile("data/Laser.bmp");
-	img.createMaskFromColor(sf::Color(255, 0, 255));
-	m_ShotTexture.loadFromImage(img);
-	m_Shot = new sf::Sprite(m_ShotTexture);
+	m_ShotTex.loadFromFile("data/Laser.png");
+	m_Shot = new sf::Sprite(m_ShotTex);
 
 	m_Position.x = 376.0f;
 	m_Position.y = 520.0f;

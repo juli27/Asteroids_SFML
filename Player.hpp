@@ -9,7 +9,7 @@ class Player
 private:
 	sf::RenderWindow *m_Window;
 	Animation *m_Player;
-	sf::Texture m_ShotTexture;
+	sf::Texture m_ShotTex;
 	sf::Sprite *m_Shot;
 	sf::Vector2f m_Position;
 	float m_PlayerAnimPhase;

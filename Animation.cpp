@@ -3,13 +3,12 @@
 Animation::Animation(const std::string Filename, int Frames, int FrameWidth, int FrameHeight, sf::RenderWindow *Window)
     : m_Window(Window)
 {
-	sf::Image AnimImg;
-	AnimImg.loadFromFile(Filename);
-	AnimImg.createMaskFromColor(sf::Color(255, 0, 255));
 	m_FrameRect.width = FrameWidth;
 	m_FrameRect.height = FrameHeight;
 
-	int FramesX = AnimImg.getSize().x / FrameWidth;
+	m_AnimationTex.loadFromFile(Filename);
+
+	int FramesX = m_AnimationTex.getSize().x / FrameWidth;
 
 	for (int i = 0; i < Frames; ++i)
 	{
@@ -18,12 +17,8 @@ Animation::Animation(const std::string Filename, int Frames, int FrameWidth, int
 
 		m_FrameRect.left = Colomn * FrameWidth;
 		m_FrameRect.top = Row * FrameHeight;
-		m_AnimPhaseTex = new sf::Texture;
 
-		m_AnimPhaseTex->loadFromImage(AnimImg, m_FrameRect);
-		m_AnimationTextures.push_back(m_AnimPhaseTex);
-
-		sf::Sprite sprite(*m_AnimPhaseTex);
+		sf::Sprite sprite(m_AnimationTex, m_FrameRect);
 		m_Animation.push_back(sprite);
     }
 }
@@ -34,12 +29,6 @@ Animation::Animation()
 
 Animation::~Animation()
 {
-	std::list<sf::Texture*>::iterator It;
-
-	for (It = m_AnimationTextures.begin(); It != m_AnimationTextures.end(); ++It)
-	{
-		delete *It;
-	}
 }
 
 sf::FloatRect Animation::getCollisionRect() const

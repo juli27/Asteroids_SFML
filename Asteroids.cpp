@@ -9,7 +9,7 @@ Asteroids::Asteroids()
 {
 	m_Window = new sf::RenderWindow(sf::VideoMode(800, 600), "Asteroids");
 
-	m_BackgroundTex.loadFromFile("data/Background.bmp");
+	m_BackgroundTex.loadFromFile("data/Background.png");
 	m_Background.setTexture(m_BackgroundTex);
 	
 	m_Font.loadFromFile("data/AGENCYR.TTF");
@@ -79,7 +79,7 @@ bool Asteroids::Run()
 		int FPS = static_cast<int> (1.0f / m_ElapsedTime.asSeconds());
 		
 		m_FPSTimer += m_ElapsedTime.asSeconds();
-		if (m_FPSTimer >= 0.5f)
+		if (m_FPSTimer >= 0.2f)
 		{
 			std::string FPSstr;
 			std::ostringstream convert;
