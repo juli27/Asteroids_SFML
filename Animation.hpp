@@ -5,7 +5,7 @@
 class Animation
 {
 private:
-	sf::RenderWindow *m_Window;
+	sf::RenderWindow &m_Window;
 	sf::Texture m_AnimationTex;
 	sf::Sprite m_AnimPhase;
 	sf::Vector2f m_Position;
@@ -13,7 +13,7 @@ private:
 	std::vector<sf::Sprite> m_Animation;
 
 public:
-	Animation(const std::string Filename, int Frames, int FrameWidth, int FrameY, sf::RenderWindow *Window);
+	Animation(const std::string Filename, int Frames, int FrameWidth, int FrameY, sf::RenderWindow &Window);
 	~Animation();
 	sf::IntRect getCollisionRect() const;
 	void setPosition(float x, float y);

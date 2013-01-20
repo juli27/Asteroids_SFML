@@ -32,6 +32,7 @@ void Asteroid::Update(sf::Time Time)
 
 	if (m_Position.y > 600.0f)
 		m_Alive = false;
+
 }
 
 void Asteroid::Render()

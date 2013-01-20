@@ -31,7 +31,7 @@ sf::Vector2f MenuEntry::getPosition() const
 	return m_Entry.getPosition();
 }
 
-void MenuEntry::Render(sf::Time Time, sf::RenderWindow *Window)
+void MenuEntry::Render(sf::Time Time, sf::RenderWindow &Window)
 {
-	Window->draw(m_Entry);
+	Window.draw(m_Entry);
 }

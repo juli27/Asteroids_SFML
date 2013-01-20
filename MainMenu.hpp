@@ -1,7 +1,6 @@
 #pragma once
 
 #include "GameState.hpp"
-#include "GameStateManager.hpp"
 #include "MenuEntry.hpp"
 #include "Animation.hpp"
 #include <map>
@@ -10,17 +9,18 @@ enum MenuEntryID
 {
 	ME_NONE,
 	ME_START,
+	ME_OPTIONS,
 	ME_QUIT
 };
 
 class MainMenu : public GameState
 {
 private:
-	GameStateManager *m_GSM;
-	sf::RenderWindow *m_Window;
-	sf::Sprite m_Background;
+	sf::RenderWindow &m_Window;
+	sf::Sprite &m_Background;
 	Animation *m_Cursor;
 	float m_CursorAnimPhase;
+	bool m_KeyLock;
 
 	std::map<MenuEntryID, MenuEntry*> m_Entries;
 	std::map<MenuEntryID, MenuEntry*>::iterator m_It;
@@ -30,7 +30,7 @@ private:
 	
 
 public:
-	MainMenu(sf::RenderWindow *Window, GameStateManager *GSM, sf::Sprite &Background);
+	MainMenu(sf::RenderWindow &Window, sf::Sprite &Background);
 	~MainMenu();
 	void Update(sf::Time Time);
 	void Render(sf::Time Time);

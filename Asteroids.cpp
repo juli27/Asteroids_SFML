@@ -2,22 +2,20 @@
 #include <iostream>
 #include <sstream>
 
+GameStateID GameState::m_ActiveGameState = GSID_NONE;
+
 Asteroids::Asteroids()
-	: m_ActiveState(NULL),
+	: m_Window(sf::VideoMode(800, 600), "Asteroids"),
+	  m_ActiveState(NULL),
 	  m_ActiveStateID(GSID_FIX),
 	  m_FPSTimer(0.0f)
 {
-	m_Window = new sf::RenderWindow(sf::VideoMode(800, 600), "Asteroids");
-
 	m_BackgroundTex.loadFromFile("data/Background.png");
 	m_Background.setTexture(m_BackgroundTex);
-	
-	m_Font.loadFromFile("data/AGENCYR.TTF");
 
+	m_Font.loadFromFile("data/AGENCYR.TTF");
 	m_FPS.setString("");
 	m_FPS.setFont(m_Font);
-
-	m_GSManager = new GameStateManager();
 }
 
 Asteroids::~Asteroids()
@@ -30,13 +28,13 @@ bool Asteroids::Run()
 	sf::Clock GameClock;
 
 	// Mainloop
-	while (m_Window->isOpen())
+	while (m_Window.isOpen())
 	{
 		m_ElapsedTime = GameClock.restart();
 
-		if (m_ActiveStateID != m_GSManager->getActiveStateID())
+		if (m_ActiveStateID != GameState::getActiveState())
 		{
-			m_ActiveStateID = m_GSManager->getActiveStateID();
+			m_ActiveStateID = GameState::getActiveState();
 
 			if (m_ActiveState)
 				delete m_ActiveState;
@@ -44,30 +42,30 @@ bool Asteroids::Run()
 			switch (m_ActiveStateID)
 			{
 			case GSID_NONE:
-				m_GSManager->setState(GSID_MAINMENU);
-				m_ActiveState = new MainMenu(m_Window, m_GSManager, m_Background);
+				GameState::setActiveState(GSID_MAINMENU);
+				m_ActiveState = new MainMenu(m_Window, m_Background);
 				break;
-
 			case GSID_MAINMENU:
-				m_ActiveState = new MainMenu(m_Window, m_GSManager, m_Background);
+				m_ActiveState = new MainMenu(m_Window, m_Background);
 				break;
-
+			case GSID_OPTIONS:
+				m_ActiveState = new Options(m_Window, m_Background);
+				break;
 			case GSID_GAME:
-				m_ActiveState = new Game(m_Window, m_GSManager, m_Background);
+				m_ActiveState = new Game(m_Window, m_Background);
 				break;
-
 			default:
 				break;
 			}
 		}
 
 		// Eventloop
-		while (m_Window->pollEvent(m_Event))
+		while (m_Window.pollEvent(m_Event))
 		{
 			switch (m_Event.type)
 			{
 			case sf::Event::Closed:
-				m_Window->close();
+				m_Window.close();
 				break;
 
 			default:
@@ -81,13 +79,9 @@ bool Asteroids::Run()
 		m_FPSTimer += m_ElapsedTime.asSeconds();
 		if (m_FPSTimer >= 0.2f)
 		{
-			std::string FPSstr;
-			std::ostringstream convert;
-			convert << FPS << " FPS";
-			FPSstr = convert.str();
-			sf::String str(FPSstr);
-			
-			m_FPS.setString(str);
+			std::ostringstream Converter;
+			Converter << FPS << " FPS";
+			m_FPS.setString(Converter.str());
 
 			m_FPSTimer = 0.0f;
 		}
@@ -95,8 +89,8 @@ bool Asteroids::Run()
 		m_ActiveState->Render(m_ElapsedTime);
 		m_ActiveState->Update(m_ElapsedTime);
 
-		m_Window->draw(m_FPS);
-		m_Window->display();
+		m_Window.draw(m_FPS);
+		m_Window.display();
 	}
 	//
 

@@ -5,12 +5,20 @@
 
 class GameState
 {
-private:
-	GameStateID m_ActiveGameState;
+protected:
+	static GameStateID m_ActiveGameState;
 
 public:
 	GameState() {}
 	virtual ~GameState() {}
 	virtual void Update(sf::Time Time) = 0;
 	virtual void Render(sf::Time Time) = 0;
+	static GameStateID getActiveState()
+	{
+		return m_ActiveGameState;
+	}
+	static void setActiveState(GameStateID ID)
+	{
+		m_ActiveGameState = ID;
+	}
 };

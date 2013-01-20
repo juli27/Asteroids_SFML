@@ -89,11 +89,13 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="Asteroids.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameStateManager.cpp" />
+    <ClCompile Include="Game.cpp">
+      <SuppressStartupBanner Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</SuppressStartupBanner>
+    </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MenuEntry.cpp" />
+    <ClCompile Include="Options.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shot.cpp" />
   </ItemGroup>
@@ -104,9 +106,9 @@
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GameState.hpp" />
     <ClInclude Include="GameStateID.hpp" />
-    <ClInclude Include="GameStateManager.hpp" />
     <ClInclude Include="MainMenu.hpp" />
     <ClInclude Include="MenuEntry.hpp" />
+    <ClInclude Include="Options.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Shot.hpp" />
   </ItemGroup>

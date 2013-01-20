@@ -7,7 +7,7 @@
 class Player
 {
 private:
-	sf::RenderWindow *m_Window;
+	sf::RenderWindow &m_Window;
 	Animation *m_Player;
 	sf::Texture m_ShotTex;
 	sf::Sprite *m_Shot;
@@ -22,7 +22,7 @@ private:
 	void CheckPosition();
 
 public:
-	Player(sf::RenderWindow *Window);
+	Player(sf::RenderWindow &Window);
 	~Player();
 	void Update(sf::Time Time);
 	void Render(sf::Time Time);

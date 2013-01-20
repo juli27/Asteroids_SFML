@@ -1,11 +1,13 @@
 #include "Game.hpp"
+#include <iostream>
 
-Game::Game(sf::RenderWindow *Window, GameStateManager *GSM, sf::Sprite &Background)
+Game::Game(sf::RenderWindow &Window, sf::Sprite &Background)
 	: m_Window(Window),
 	  m_Background(Background),
-	  m_GSM(GSM)
+	  m_Points(0),
+	  m_Player(m_Window)
 {
-	m_Player = new Player(m_Window);
+	// m_Player = new Player(m_Window);
 	m_Asteroid = new Animation("data/Asteroid.png", 20, 64, 64, m_Window);
 
 	m_AsteroidTimer = 0.0f;
@@ -13,20 +15,20 @@ Game::Game(sf::RenderWindow *Window, GameStateManager *GSM, sf::Sprite &Backgrou
 
 Game::~Game()
 {
-	delete m_Player;
 	delete m_Asteroid;
+	std::cout << "Gesamtpunktzahl: " << m_Points << std::endl;
 }
 
 void Game::CheckCollisions()
 {
-	std::list<Shot> *ShotList = m_Player->getShotList();
+	std::list<Shot> *ShotList = m_Player.getShotList();
 
 	std::list<Asteroid>::iterator AsteroidIt = m_Asteroids.begin();
 	std::list<Shot>::iterator ShotIt;
 
 	sf::IntRect AsteroidRect;
 	sf::IntRect ShotRect;
-	sf::IntRect PlayerRect = m_Player->getCollisionRect();
+	sf::IntRect PlayerRect = m_Player.getCollisionRect();
 
 	while (AsteroidIt != m_Asteroids.end())
 	{
@@ -40,12 +42,13 @@ void Game::CheckCollisions()
 			{
 				AsteroidIt->setAlive(false);
 				ShotIt->setAlive(false);
+				m_Points++;
 			}
 		}
 
 		if (PlayerRect.intersects(AsteroidRect))
 		{
-			m_GSM->setState(GSID_MAINMENU);
+			m_ActiveGameState = GSID_MAINMENU;
 		}
 
 		if (AsteroidIt->isAlive())
@@ -88,18 +91,18 @@ void Game::RenderAsteroids(sf::Time Time)
 
 void Game::Update(sf::Time Time)
 {
-	m_Player->Update(Time);
+	m_Player.Update(Time);
 	UpdateAsteroids(Time);
 	CheckCollisions();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-		m_GSM->setState(GSID_MAINMENU);
+		m_ActiveGameState = GSID_MAINMENU;
 }
 
 void Game::Render(sf::Time Time)
 {
-	m_Window->clear(sf::Color::Magenta);
-	m_Window->draw(m_Background);
-	m_Player->Render(Time);
+	m_Window.clear(sf::Color::Magenta);
+	m_Window.draw(m_Background);
+	m_Player.Render(Time);
 	RenderAsteroids(Time);
 }

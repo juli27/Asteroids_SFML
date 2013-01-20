@@ -16,5 +16,5 @@ public:
 	bool isActive() const;
 	void setActive();
 	sf::Vector2f getPosition() const;
-	void Render(sf::Time Time, sf::RenderWindow *Window);
+	void Render(sf::Time Time, sf::RenderWindow &Window);
 };

@@ -1,6 +1,6 @@
 #include "Player.hpp"
 
-Player::Player(sf::RenderWindow *Window)
+Player::Player(sf::RenderWindow &Window)
 	: m_Window(Window)
 {
 	m_Player = new Animation("data/Player.png", 11, 64, 64, m_Window);
@@ -51,7 +51,6 @@ void Player::Render(sf::Time Time)
 	}
 }
 
-// private:
 void Player::ProcessMoving(sf::Time Time)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))

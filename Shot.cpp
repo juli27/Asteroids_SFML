@@ -1,6 +1,6 @@
 #include "Shot.hpp"
 
-Shot::Shot(sf::Sprite *Shot, sf::Vector2f Pos, sf::RenderWindow *Window)
+Shot::Shot(sf::Sprite *Shot, sf::Vector2f Pos, sf::RenderWindow &Window)
 	: m_Shot(Shot),
 	  m_Position(Pos),
 	  m_Window(Window)
@@ -32,7 +32,7 @@ void Shot::Render()
 	if (m_Alive)
 	{
 		m_Shot->setPosition(m_Position);
-		m_Window->draw(*m_Shot);
+		m_Window.draw(*m_Shot);
 	}
 }
 
