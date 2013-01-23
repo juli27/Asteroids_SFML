@@ -21,6 +21,8 @@ private:
 	Animation *m_Cursor;
 	float m_CursorAnimPhase;
 	bool m_KeyLock;
+	sf::Font m_Font;
+	sf::Text m_Copyright;
 
 	std::map<MenuEntryID, MenuEntry*> m_Entries;
 	std::map<MenuEntryID, MenuEntry*>::iterator m_It;

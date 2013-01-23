@@ -14,6 +14,7 @@ private:
 	sf::Vector2f m_Position;
 	float m_PlayerAnimPhase;
 	bool m_ShotLock;
+	bool m_Alive;
 
 	std::list<Shot> m_ShotList;
 
@@ -28,4 +29,6 @@ public:
 	void Render(sf::Time Time);
 	std::list<Shot> *getShotList();
 	sf::IntRect getCollisionRect() const;
+	bool isAlive() const;
+	void setAlive(bool Alive);
 };

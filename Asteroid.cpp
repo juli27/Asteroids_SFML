@@ -55,3 +55,8 @@ sf::IntRect Asteroid::getCollisionRect() const
 {
 	return m_CollisionRect;
 }
+
+sf::Vector2f Asteroid::getPosition() const
+{
+	return m_Position;
+}

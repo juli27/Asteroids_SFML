@@ -20,6 +20,12 @@ MainMenu::MainMenu(sf::RenderWindow &Window, sf::Sprite &Background)
 	Entry = new MenuEntry("Quit", 300.0f, 400.0f);
 	m_Entry = std::make_pair(ME_QUIT, Entry);
 	m_Entries.insert(m_Entry);
+
+	m_Font.loadFromFile("data/AGENCYR.TTF");
+	m_Copyright.setFont(m_Font);
+	m_Copyright.setCharacterSize(20);
+	m_Copyright.setString("Julian Bühler 2013");
+	m_Copyright.setPosition(690, 580);
 }
 
 MainMenu::~MainMenu()
@@ -127,4 +133,5 @@ void MainMenu::Render(sf::Time Time)
 	}
 
 	m_Cursor->Render(m_CursorAnimPhase);
+	m_Window.draw(m_Copyright);
 }

@@ -19,4 +19,5 @@ public:
 	bool isAlive() const;
 	void setAlive(bool Alive);
 	sf::IntRect getCollisionRect() const;
+	sf::Vector2f getPosition() const;
 };

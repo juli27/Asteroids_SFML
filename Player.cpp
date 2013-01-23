@@ -1,7 +1,8 @@
 #include "Player.hpp"
 
-Player::Player(sf::RenderWindow &Window)
-	: m_Window(Window)
+Player::Player(sf::RenderWindow &Window) :
+	m_Window(Window),
+	m_Alive(true)
 {
 	m_Player = new Animation("data/Player.png", 11, 64, 64, m_Window);
 	
@@ -53,12 +54,12 @@ void Player::Render(sf::Time Time)
 
 void Player::ProcessMoving(sf::Time Time)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && m_Alive)
 	{
 		m_Position.x -= 300.0f * Time.asSeconds();
 		m_PlayerAnimPhase -= 30.0f * Time.asSeconds();
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && m_Alive)
 	{
 		m_Position.x += 300.0f * Time.asSeconds();
 		m_PlayerAnimPhase += 30.0f * Time.asSeconds();
@@ -74,7 +75,7 @@ void Player::ProcessMoving(sf::Time Time)
 
 void Player::ProcessShooting(sf::Time Time)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_ShotLock == false)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !m_ShotLock && m_Alive)
 	{
 		Shot shot(m_Shot, m_Position, m_Window);
 
@@ -110,4 +111,14 @@ std::list<Shot> *Player::getShotList()
 sf::IntRect Player::getCollisionRect() const
 {
 	return m_Player->getCollisionRect();
+}
+
+bool Player::isAlive() const
+{
+	return m_Alive;
+}
+
+void Player::setAlive(bool Alive)
+{
+	m_Alive = Alive;
 }
