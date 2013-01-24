@@ -1,4 +1,4 @@
 Asteroids_SFML
 ==============
 
-A little game made with C++ and the SFML Libraray
+A little game made with C++ and the SFML Library
