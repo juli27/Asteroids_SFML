@@ -7,7 +7,6 @@ Game::Game(sf::RenderWindow &Window, sf::Sprite &Background)
 	  m_Points(0),
 	  m_Player(m_Window)
 {
-	// m_Player = new Player(m_Window);
 	m_Asteroid = new Animation("data/Asteroid.png", 20, 64, 64, m_Window);
 	m_Explosion = new Animation("data/Explosion1.png", 16, 64, 64, m_Window);
 

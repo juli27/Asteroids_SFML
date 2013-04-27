@@ -3,10 +3,10 @@
 
 bool Options::m_VSyncEnabled = false;
 
-Options::Options(sf::RenderWindow &Window, sf::Sprite &Background)
-	: m_Window(Window),
-	  m_Background(Background),
-	  m_KeyLock(true)
+Options::Options(sf::RenderWindow &Window, sf::Sprite &Background) :
+	m_Window(Window),
+	m_Background(Background),
+	m_KeyLock(true)
 {
 	m_Font.loadFromFile("data/AGENCYR.TTF");
 	m_VSync.setFont(m_Font);
@@ -51,9 +51,9 @@ void Options::Update(sf::Time Time)
 	std::ostringstream Converter;
 	Converter << "VSync: ";
 	if (m_VSyncEnabled)
-		Converter << "an";
+		Converter << "on";
 	else
-		Converter << "aus";
+		Converter << "off";
 	
 	m_VSync.setString(Converter.str());
 
