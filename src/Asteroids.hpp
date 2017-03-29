@@ -1,11 +1,8 @@
 #pragma once
 
-#include "MainMenu.hpp"
-#include "Game.hpp"
-#include "Options.hpp"
+#include <SFML\Graphics.hpp>
 
-class Asteroids
-{
+class Asteroids {
 private:
 	sf::RenderWindow m_Window;
 	sf::Event m_Event;
@@ -16,11 +13,8 @@ private:
 	sf::Text m_FPS;
 	float m_FPSTimer;
 
-	GameState *m_ActiveState;
-	GameStateID m_ActiveStateID;
-
 public:
 	Asteroids();
 	~Asteroids();
-	bool Run();
+	bool run();
 };

@@ -1,9 +1,8 @@
 #include "Asteroids.hpp"
 
-int main()
-{
-	Asteroids TheGame;
-	TheGame.Run();
+int main() {
+	Asteroids game;
+	game.run();
 
 	return 0;
 }

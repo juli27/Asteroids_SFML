@@ -1,6 +1,8 @@
 #pragma once
 
-#include "GameState.hpp"
+#include <SFML\Graphics.hpp>
+
+#include "GameStateManager.hpp"
 
 class Options : public GameState
 {
@@ -15,9 +17,8 @@ private:
 
 public:
 
-	Options(sf::RenderWindow &Window, sf::Sprite &Background);
+	Options(sf::RenderWindow &window, sf::Sprite &background);
 	~Options();
-	void Update(sf::Time Time);
-	void Render(sf::Time Time);
-
+	void update(sf::Time Time);
+	void render(sf::Time Time);
 };

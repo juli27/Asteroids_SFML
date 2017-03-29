@@ -1,9 +1,12 @@
 #pragma once
 
-#include "GameState.hpp"
+#include <map>
+
+#include <SFML\Graphics.hpp>
+
+#include "GameStateManager.hpp"
 #include "MenuEntry.hpp"
 #include "Animation.hpp"
-#include <map>
 
 enum MenuEntryID
 {
@@ -32,8 +35,8 @@ private:
 	
 
 public:
-	MainMenu(sf::RenderWindow &Window, sf::Sprite &Background);
+	MainMenu(sf::RenderWindow &window, sf::Sprite &background);
 	~MainMenu();
-	void Update(sf::Time Time);
-	void Render(sf::Time Time);
+	void update(sf::Time Time);
+	void render(sf::Time Time);
 };

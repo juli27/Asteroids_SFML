@@ -1,11 +1,13 @@
-#include "Options.hpp"
 #include <sstream>
+
+#include "Options.hpp"
 
 bool Options::m_VSyncEnabled = false;
 
-Options::Options(sf::RenderWindow &Window, sf::Sprite &Background) :
-	m_Window(Window),
-	m_Background(Background),
+Options::Options(sf::RenderWindow &window, sf::Sprite &background) :
+	GameState(GSID_OPTIONS),
+	m_Window(window),
+	m_Background(background),
 	m_KeyLock(true)
 {
 	m_Font.loadFromFile("data/AGENCYR.TTF");
@@ -21,11 +23,11 @@ Options::~Options()
 {
 }
 
-void Options::Update(sf::Time Time)
+void Options::update(sf::Time Time)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
-		m_ActiveGameState = GSID_MAINMENU;
+		GameStateManager::setNextActiveGameState(GSID_MAINMENU);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && !m_KeyLock)
@@ -59,7 +61,7 @@ void Options::Update(sf::Time Time)
 
 }
 
-void Options::Render(sf::Time Time)
+void Options::render(sf::Time Time)
 {
 	m_Window.clear(sf::Color::Magenta);
 	m_Window.draw(m_Background);

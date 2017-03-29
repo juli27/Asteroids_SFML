@@ -54,9 +54,6 @@
     <ClCompile Include="src\Explosion.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\FileParser.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -78,6 +75,9 @@
     <ClCompile Include="src\Shot.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameStateManager.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Animation.hpp">
@@ -92,9 +92,6 @@
     <ClInclude Include="src\Explosion.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\FileParser.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -102,9 +99,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="src\GameState.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameStateID.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="src\MainMenu.hpp">
@@ -120,6 +114,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="src\Shot.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameStateManager.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

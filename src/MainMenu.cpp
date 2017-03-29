@@ -1,11 +1,12 @@
 #include "MainMenu.hpp"
 
-MainMenu::MainMenu(sf::RenderWindow &Window, sf::Sprite &Background)
-	: m_Window(Window),
-	  m_ActiveEntry(ME_START),
-	  m_CursorAnimPhase(0.0f),
-	  m_Background(Background),
-	  m_KeyLock(true)
+MainMenu::MainMenu(sf::RenderWindow &window, sf::Sprite &background) :
+	GameState(GSID_MAINMENU),
+	m_Window(window),
+	m_ActiveEntry(ME_START),
+	m_CursorAnimPhase(0.0f),
+	m_Background(background),
+	m_KeyLock(true)
 {
 	m_Cursor = new Animation("data/Asteroid.png", 20, 64, 64, m_Window);
 
@@ -36,8 +37,7 @@ MainMenu::~MainMenu()
 	}
 }
 
-void MainMenu::Update(sf::Time Time)
-{
+void MainMenu::update(sf::Time Time) {
 	m_It = m_Entries.find(m_ActiveEntry);
 
 	if (!m_It->second->isActive())
@@ -100,10 +100,10 @@ void MainMenu::Update(sf::Time Time)
 		case ME_NONE:
 			break;
 		case ME_START:
-			m_ActiveGameState = GSID_GAME;
+			GameStateManager::setNextActiveGameState(GSID_GAME);
 			break;
 		case ME_OPTIONS:
-			m_ActiveGameState = GSID_OPTIONS;
+			GameStateManager::setNextActiveGameState(GSID_OPTIONS);
 			break;
 		case ME_QUIT:
 			m_Window.close();
@@ -122,8 +122,7 @@ void MainMenu::Update(sf::Time Time)
 	//
 }
 
-void MainMenu::Render(sf::Time Time)
-{
+void MainMenu::render(sf::Time Time) {
 	m_Window.clear(sf::Color::Magenta);
 	m_Window.draw(m_Background);
 

@@ -1,11 +1,12 @@
 #include "Game.hpp"
 #include <iostream>
 
-Game::Game(sf::RenderWindow &Window, sf::Sprite &Background)
-	: m_Window(Window),
-	  m_Background(Background),
-	  m_Points(0),
-	  m_Player(m_Window)
+Game::Game(sf::RenderWindow &Window, sf::Sprite &Background) :
+	GameState(GSID_GAME),
+	m_Window(Window),
+	m_Background(Background),
+	m_Points(0),
+	m_Player(m_Window)
 {
 	m_Asteroid = new Animation("data/Asteroid.png", 20, 64, 64, m_Window);
 	m_Explosion = new Animation("data/Explosion1.png", 16, 64, 64, m_Window);
@@ -132,27 +133,24 @@ void Game::RenderAsteroids()
 	}
 }
 
-void Game::Update(sf::Time Time)
-{
+void Game::update(sf::Time Time) {
 	m_Player.Update(Time);
 	UpdateAsteroids(Time);
 	UpdateEffects(Time);
 	CheckCollisions();
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-		m_ActiveGameState = GSID_MAINMENU;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+		GameStateManager::setNextActiveGameState(GSID_MAINMENU);
+	}
 
-	if (!m_Player.isAlive())
-	{
-		if (m_Asteroids.empty())
-		{
-			m_ActiveGameState = GSID_MAINMENU;
+	if (!m_Player.isAlive()) {
+		if (m_Asteroids.empty()) {
+			GameStateManager::setNextActiveGameState(GSID_MAINMENU);
 		}
 	}
 }
 
-void Game::Render(sf::Time Time)
-{
+void Game::render(sf::Time Time) {
 	m_Window.clear(sf::Color::Magenta);
 	m_Window.draw(m_Background);
 	m_Player.Render(Time);

@@ -1,6 +1,8 @@
 #pragma once
 
-#include  "GameState.hpp"
+#include <SFML\Graphics.hpp>
+
+#include "GameStateManager.hpp"
 #include "Player.hpp"
 #include "Asteroid.hpp"
 #include "Explosion.hpp"
@@ -27,6 +29,6 @@ private:
 public:
 	Game(sf::RenderWindow &Window, sf::Sprite &Background);
 	~Game();
-	void Update(sf::Time Time);
-	void Render(sf::Time Time);
+	void update(sf::Time Time);
+	void render(sf::Time Time);
 };
