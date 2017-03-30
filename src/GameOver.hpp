@@ -1,7 +1,6 @@
 #pragma once
 
-class GameOver
-{
+class GameOver {
 private:
 
 

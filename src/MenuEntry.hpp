@@ -2,8 +2,7 @@
 
 #include "SFML\Graphics.hpp"
 
-class MenuEntry
-{
+class MenuEntry {
 private:
 	bool m_Active;
 	sf::String m_Text;

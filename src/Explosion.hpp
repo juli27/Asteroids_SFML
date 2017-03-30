@@ -2,8 +2,7 @@
 
 #include "SFML\Graphics.hpp"
 
-class Explosion
-{
+class Explosion {
 private:
 	float m_AnimationPhase;
 	sf::Vector2f m_Position;

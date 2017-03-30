@@ -2,8 +2,7 @@
 
 #include "Animation.hpp"
 
-class Asteroid
-{
+class Asteroid {
 private:
 	Animation *m_Asteroid;
 	sf::Vector2f m_Position;

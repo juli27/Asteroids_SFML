@@ -2,16 +2,14 @@
 
 #include <SFML\Graphics.hpp>
 
-#include "GameStateManager.hpp"
-#include "Player.hpp"
 #include "Asteroid.hpp"
 #include "Explosion.hpp"
+#include "GameStateManager.hpp"
+#include "Player.hpp"
 
-class Game : public GameState
-{
+class Game : public GameState {
 private:
 	sf::RenderWindow &m_Window;
-	sf::Sprite &m_Background;
 	Player m_Player;
 	Animation *m_Asteroid;
 	Animation *m_Explosion;
@@ -27,8 +25,8 @@ private:
 	void CheckCollisions();
 
 public:
-	Game(sf::RenderWindow &Window, sf::Sprite &Background);
+	Game(sf::RenderWindow &window, const sf::Font* font);
 	~Game();
-	void update(sf::Time Time);
-	void render(sf::Time Time);
+	void update(sf::Time& time);
+	void render(sf::Time& time);
 };

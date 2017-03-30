@@ -1,22 +1,27 @@
 #pragma once
 
-#include "SFML\Graphics.hpp"
+#include <SFML\Graphics.hpp>
 
-class Animation
-{
+class Animation : public sf::Sprite {
 private:
-	sf::RenderWindow &m_Window;
-	sf::Texture m_AnimationTex;
-	sf::Sprite m_AnimPhase;
-	sf::Vector2f m_Position;
-	sf::IntRect m_FrameRect;
-	std::vector<sf::Sprite> m_Animation;
+	sf::IntRect* m_Frames;
+	int m_NumFrames;
+	float m_Speed;
+	float m_CurrentFrame;
+	bool m_Looped;
 
 public:
-	Animation(const std::string Filename, int Frames, int FrameWidth, int FrameY, sf::RenderWindow &Window);
-	~Animation();
+	Animation(const std::string filename, int numFrames, int frameWidth, int frameHeight, float speed = 0.0f);
+	virtual ~Animation();
+
+	void update(sf::Time& time);
+
+	void setSpeed(float speedFactor);
+	void setFrame(int frame);
+	void setLooped(bool looped);
+
+	float getSpeed() const;
+	int getFrame() const;
+	bool isLooped() const;
 	sf::IntRect getCollisionRect() const;
-	void setPosition(float x, float y);
-	void setPosition(sf::Vector2f Position);
-	void Render(float FrameNumber);
 };

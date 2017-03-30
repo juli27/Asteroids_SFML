@@ -10,7 +10,7 @@ private:
 	static GameStateID m_nextGameState;
 
 public:
-	static GameState* updateActiveGameState(sf::RenderWindow& window, sf::Sprite& background);
+	static GameState* updateActiveGameState(sf::RenderWindow& window, const sf::Font* font);
 	static void setNextActiveGameState(GameStateID id);
 	static GameState* getActiveGameState();
 };

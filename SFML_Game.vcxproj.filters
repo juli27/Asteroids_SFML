@@ -72,10 +72,10 @@
     <ClCompile Include="src\Player.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\Shot.cpp">
+    <ClCompile Include="src\GameStateManager.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameStateManager.cpp">
+    <ClCompile Include="src\Projectile.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -113,10 +113,10 @@
     <ClInclude Include="src\Player.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\Shot.hpp">
+    <ClInclude Include="src\GameStateManager.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameStateManager.hpp">
+    <ClInclude Include="src\Projectile.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

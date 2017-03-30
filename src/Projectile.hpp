@@ -2,8 +2,7 @@
 
 #include "SFML\Graphics.hpp"
 
-class Shot
-{
+class Shot {
 private:
 	sf::RenderWindow &m_Window;
 	sf::Sprite *m_Shot;

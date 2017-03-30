@@ -4,21 +4,18 @@
 
 #include "GameStateManager.hpp"
 
-class Options : public GameState
-{
+class Options : public GameState {
 private:
 	sf::RenderWindow &m_Window;
-	sf::Sprite &m_Background;
 	bool m_KeyLock;
-	sf::Font m_Font;
 	sf::Text m_VSync;
 	sf::Text m_Instructions;
 	static bool m_VSyncEnabled;
 
 public:
-
-	Options(sf::RenderWindow &window, sf::Sprite &background);
+	Options(sf::RenderWindow &window, const sf::Font* font);
 	~Options();
-	void update(sf::Time Time);
-	void render(sf::Time Time);
+
+	void update(sf::Time& time);
+	void render(sf::Time& time);
 };
