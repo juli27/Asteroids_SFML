@@ -18,24 +18,24 @@ Game::~Game() {
 }
 
 void Game::CheckCollisions() {
-	std::list<Shot> *ShotList = m_Player.getShotList();
+	std::list<Projectile> *projectiles = m_Player.getProjectiles();
 
 	std::list<Asteroid>::iterator AsteroidIt = m_Asteroids.begin();
-	std::list<Shot>::iterator ShotIt;
+	std::list<Projectile>::iterator projectileIt;
 
 	sf::IntRect AsteroidRect;
-	sf::IntRect ShotRect;
+	sf::IntRect projectileRect;
 	sf::IntRect PlayerRect = m_Player.getCollisionRect();
 
 	while (AsteroidIt != m_Asteroids.end()) {
 		AsteroidRect = AsteroidIt->getCollisionRect();
 
-		for (ShotIt = ShotList->begin(); ShotIt != ShotList->end(); ++ShotIt) {
-			ShotRect = ShotIt->getCollisionRect();
+		for (projectileIt = projectiles->begin(); projectileIt != projectiles->end(); ++projectileIt) {
+			projectileRect = projectileIt->getCollisionRect();
 
-			if (ShotRect.intersects(AsteroidRect)) {
+			if (projectileRect.intersects(AsteroidRect)) {
 				AsteroidIt->setAlive(false);
-				ShotIt->setAlive(false);
+				projectileIt->setAlive(false);
 				m_Points++;
 
 				Explosion Expl(AsteroidIt->getPosition());

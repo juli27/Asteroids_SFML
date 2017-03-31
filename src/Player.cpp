@@ -5,9 +5,6 @@ Player::Player(sf::RenderWindow& window)
 		m_Animation("data/Player.png", 11, 64, 64),
 		m_ShotLock(false),
 		m_Alive(true) {
-	m_ShotTex.loadFromFile("data/Laser.png");
-	m_Shot = new sf::Sprite(m_ShotTex);
-
 	m_Position.x = 376.0f;
 	m_Position.y = 520.0f;
 	
@@ -16,29 +13,27 @@ Player::Player(sf::RenderWindow& window)
 	m_Animation.setLooped(false);
 }
 
-Player::~Player() {
-	delete m_Shot;
-}
+Player::~Player() { }
 
 void Player::update(sf::Time& time) {
 	processMoving(time);
 	processShooting(time);
 }
 
-void Player::render(sf::Time& Time) {
+void Player::render(sf::Time& time) {
 	m_Animation.setPosition(m_Position);
 	m_Window.draw(m_Animation);
 
-	std::list<Shot>::iterator It = m_ShotList.begin();
-	while (It != m_ShotList.end()) {
-		It->Update(Time);
+	std::list<Projectile>::iterator it = m_Projectiles.begin();
+	while (it != m_Projectiles.end()) {
+		it->update(time);
 
-		if (It->isAlive()) {
-			It->Render();
-			It++;
+		if (it->isAlive()) {
+			m_Window.draw(*it);
+			it++;
 		}
 		else {
-			It = m_ShotList.erase(It);
+			it = m_Projectiles.erase(it);
 		}
 	}
 }
@@ -75,9 +70,9 @@ void Player::processMoving(sf::Time& time) {
 
 void Player::processShooting(sf::Time& time) {
 	if (!m_ShotLock && sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_Alive) {
-		Shot shot(m_Shot, m_Position, m_Window);
+		Projectile projectile(m_Position);
 
-		m_ShotList.push_back(shot);
+		m_Projectiles.push_back(projectile);
 
 		m_ShotLock = true;
 	}
@@ -87,8 +82,8 @@ void Player::processShooting(sf::Time& time) {
 	}
 }
 
-std::list<Shot> *Player::getShotList() {
-	return &m_ShotList;
+std::list<Projectile>* Player::getProjectiles() {
+	return &m_Projectiles;
 }
 
 sf::IntRect Player::getCollisionRect() const {

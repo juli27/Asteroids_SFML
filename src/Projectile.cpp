@@ -1,43 +1,41 @@
 #include "Projectile.hpp"
 
-Shot::Shot(sf::Sprite *Shot, sf::Vector2f Pos, sf::RenderWindow &Window)
-	: m_Shot(Shot),
-	m_Position(Pos),
-	m_Window(Window) {
-	m_CollisionRect.left = static_cast<int> (m_Position.x);
-	m_CollisionRect.top = static_cast<int> (m_Position.y);
-	m_CollisionRect.width = static_cast<int>(m_Shot->getLocalBounds().width);
-	m_CollisionRect.height = static_cast<int> (m_Shot->getLocalBounds().height);
+#include "GameStateManager.hpp"
 
-	m_Alive = true;
+sf::Texture* Projectile::m_Tex;
+
+Projectile::Projectile(sf::Vector2f& pos)
+	: m_Alive(true) {
+	if (!m_Tex) {
+		m_Tex = new sf::Texture();
+		m_Tex->loadFromFile("data/Laser.png");
+	}
+
+	setTexture(*m_Tex);
+	setPosition(pos);
 }
 
-Shot::~Shot() { }
-
-void Shot::Update(sf::Time Time) {
-	m_Position.y -= 400.0f * Time.asSeconds();
-
-	m_CollisionRect.top = static_cast<int> (m_Position.y);
-
-	if (m_Position.y < -20.0f)
-		m_Alive = false;
-}
-
-void Shot::Render() {
-	if (m_Alive) {
-		m_Shot->setPosition(m_Position);
-		m_Window.draw(*m_Shot);
+Projectile::~Projectile() {
+	if (GameStateManager::getActiveGameState()->getGameStateID() != GSID_GAME) {
+		delete m_Tex;
 	}
 }
 
-bool Shot::isAlive() const {
+void Projectile::update(sf::Time& time) {
+	setPosition(getPosition().x, getPosition().y - 400.0f * time.asSeconds());
+
+	if (getPosition().y < -20.0f)
+		m_Alive = false;
+}
+
+bool Projectile::isAlive() const {
 	return m_Alive;
 }
 
-void Shot::setAlive(bool Alive) {
-	m_Alive = Alive;
+void Projectile::setAlive(bool alive) {
+	m_Alive = alive;
 }
 
-sf::IntRect Shot::getCollisionRect() const {
-	return m_CollisionRect;
+sf::IntRect Projectile::getCollisionRect() const {
+	return sf::IntRect(getGlobalBounds());
 }

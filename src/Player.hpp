@@ -9,13 +9,10 @@ class Player {
 private:
 	sf::RenderWindow& m_Window;
 	Animation m_Animation;
-	sf::Texture m_ShotTex;
-	sf::Sprite *m_Shot;
 	sf::Vector2f m_Position;
 	bool m_ShotLock;
 	bool m_Alive;
-
-	std::list<Shot> m_ShotList;
+	std::list<Projectile> m_Projectiles;
 
 	void processMoving(sf::Time& time);
 	void processShooting(sf::Time& time);
@@ -27,7 +24,7 @@ public:
 	void update(sf::Time& time);
 	void render(sf::Time& time);
 
-	std::list<Shot> *getShotList();
+	std::list<Projectile>* getProjectiles();
 	sf::IntRect getCollisionRect() const;
 	bool isAlive() const;
 	void setAlive(bool Alive);

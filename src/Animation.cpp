@@ -26,6 +26,7 @@ Animation::Animation(const std::string filename, int numFrames, int frameWidth, 
 
 Animation::~Animation() {
 	delete getTexture();
+	delete[] m_Frames;
 }
 
 void Animation::update(sf::Time& time) {
@@ -36,12 +37,12 @@ void Animation::update(sf::Time& time) {
 			m_CurrentFrame = 0.0f;
 		}
 		else {
-			m_CurrentFrame = m_NumFrames - 1;
+			m_CurrentFrame = m_NumFrames - 1.0f;
 		}
 	}
 	else if (m_CurrentFrame < 0) {
 		if (m_Looped) {
-			m_CurrentFrame = m_NumFrames - 1;
+			m_CurrentFrame = m_NumFrames - 1.0f;
 		}
 		else {
 			m_CurrentFrame = 0.0f;
