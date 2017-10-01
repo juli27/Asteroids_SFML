@@ -15,7 +15,7 @@ private:
 	std::list<Projectile> m_Projectiles;
 
 	void processMoving(sf::Time& time);
-	void processShooting(sf::Time& time);
+	void processShooting();
 
 public:
 	Player(sf::RenderWindow& window);

@@ -17,7 +17,7 @@ Player::~Player() { }
 
 void Player::update(sf::Time& time) {
 	processMoving(time);
-	processShooting(time);
+	processShooting();
 }
 
 void Player::render(sf::Time& time) {
@@ -68,7 +68,7 @@ void Player::processMoving(sf::Time& time) {
 	m_Animation.update(time);
 }
 
-void Player::processShooting(sf::Time& time) {
+void Player::processShooting() {
 	if (!m_ShotLock && sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_Alive) {
 		Projectile projectile(m_Position);
 

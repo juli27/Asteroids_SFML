@@ -1,8 +1,8 @@
-#include "Asteroids.hpp"
+#include "Application.hpp"
 
 int main() {
-	Asteroids game;
-	game.run();
+  Application game;
+  game.run();
 
-	return 0;
+  return 0;
 }

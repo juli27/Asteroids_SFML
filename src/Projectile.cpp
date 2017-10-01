@@ -1,7 +1,5 @@
 #include "Projectile.hpp"
 
-#include "GameStateManager.hpp"
-
 sf::Texture* Projectile::m_Tex;
 
 Projectile::Projectile(sf::Vector2f& pos)
@@ -16,9 +14,7 @@ Projectile::Projectile(sf::Vector2f& pos)
 }
 
 Projectile::~Projectile() {
-	if (GameStateManager::getActiveGameState()->getGameStateID() != GSID_GAME) {
-		delete m_Tex;
-	}
+  //TODO m_Tex memory leak
 }
 
 void Projectile::update(sf::Time& time) {

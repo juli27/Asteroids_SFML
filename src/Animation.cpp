@@ -3,7 +3,8 @@
 Animation::Animation(const std::string filename, int numFrames, int frameWidth, int frameHeight, float speed)
 	: m_NumFrames(numFrames),
 		m_Speed(speed),
-		m_CurrentFrame(0),
+    currentFrame(0),
+		nextFrameIndex(0.0f),
 		m_Looped(true) {
 	sf::Texture* tex = new sf::Texture();
 	tex->loadFromFile(filename);
@@ -22,6 +23,8 @@ Animation::Animation(const std::string filename, int numFrames, int frameWidth, 
 		m_Frames[i].width = frameWidth;
 		m_Frames[i].height = frameHeight;
 	}
+
+  setTextureRect(m_Frames[currentFrame]);
 }
 
 Animation::~Animation() {
@@ -30,26 +33,30 @@ Animation::~Animation() {
 }
 
 void Animation::update(sf::Time& time) {
-	m_CurrentFrame += m_Speed * time.asSeconds();
+	nextFrameIndex += m_Speed * time.asSeconds();
 
-	if (m_CurrentFrame >= m_NumFrames) {
+	if (nextFrameIndex >= m_NumFrames) {
 		if (m_Looped) {
-			m_CurrentFrame = 0.0f;
+			nextFrameIndex = 0.0f;
 		}
 		else {
-			m_CurrentFrame = m_NumFrames - 1.0f;
+			nextFrameIndex = m_NumFrames - 1.0f;
 		}
 	}
-	else if (m_CurrentFrame < 0) {
+	else if (nextFrameIndex < 0) {
 		if (m_Looped) {
-			m_CurrentFrame = m_NumFrames - 1.0f;
+			nextFrameIndex = m_NumFrames - 1.0f;
 		}
 		else {
-			m_CurrentFrame = 0.0f;
+			nextFrameIndex = 0.0f;
 		}
 	}
 
-	setTextureRect(m_Frames[static_cast<int> (m_CurrentFrame)]);
+  //TODO hmm. does this work reliably with float?
+  if (currentFrame != std::floor(nextFrameIndex)) {
+    currentFrame = static_cast<int> (nextFrameIndex);
+    setTextureRect(m_Frames[currentFrame]);
+  }
 }
 
 void Animation::setSpeed(float speedFactor) {
@@ -57,8 +64,8 @@ void Animation::setSpeed(float speedFactor) {
 }
 
 void Animation::setFrame(int frame) {
-	m_CurrentFrame = static_cast<float> (frame);
-	setTextureRect(m_Frames[static_cast<int> (m_CurrentFrame)]);
+	nextFrameIndex = static_cast<float> (frame);
+	setTextureRect(m_Frames[static_cast<int> (nextFrameIndex)]);
 }
 
 void Animation::setLooped(bool looped) {
@@ -70,7 +77,7 @@ float Animation::getSpeed() const {
 }
 
 int Animation::getFrame() const {
-	return static_cast<int> (m_CurrentFrame);
+	return static_cast<int> (nextFrameIndex);
 }
 
 bool Animation::isLooped() const {

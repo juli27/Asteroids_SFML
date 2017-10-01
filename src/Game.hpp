@@ -4,23 +4,22 @@
 
 #include "Asteroid.hpp"
 #include "Explosion.hpp"
-#include "GameStateManager.hpp"
+#include "GameState.hpp"
 #include "Player.hpp"
 
 class Game : public GameState {
 private:
 	sf::RenderWindow &m_Window;
 	Player m_Player;
-	Animation *m_Asteroid;
 	Animation *m_Explosion;
 	std::list<Asteroid> m_Asteroids;
 	std::list<Explosion> m_Explosions;
 	float m_AsteroidTimer;
 	int m_Points;
 
-	void UpdateAsteroids(sf::Time Time);
+	void updateAsteroids(sf::Time& time);
 	void UpdateEffects(sf::Time Time);
-	void RenderAsteroids();
+	void renderAsteroids();
 	void RenderEffects();
 	void CheckCollisions();
 

@@ -2,21 +2,17 @@
 
 #include "Animation.hpp"
 
-class Asteroid {
+class Asteroid : public Animation {
 private:
-	Animation *m_Asteroid;
-	sf::Vector2f m_Position;
-	sf::IntRect m_CollisionRect;
-	float m_AsteroidAnimPhase;
 	bool m_Alive;
 
 public:
-	Asteroid(Animation *Asteroid, sf::Vector2f Position);
-	~Asteroid();
-	void Update(sf::Time Time);
-	void Render();
-	bool isAlive() const;
+	Asteroid(sf::Vector2f& position);
+	virtual ~Asteroid();
+
+	void update(sf::Time& time);
+
 	void setAlive(bool Alive);
+	bool isAlive() const;
 	sf::IntRect getCollisionRect() const;
-	sf::Vector2f getPosition() const;
 };

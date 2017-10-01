@@ -1,26 +1,40 @@
 #pragma once
 
-#include <SFML\System\Time.hpp>
-
 enum GameStateID {
-	GSID_NONE,
-	GSID_MAINMENU,
-	GSID_OPTIONS,
-	GSID_GAME
+  GSID_NONE,
+  GSID_MAINMENU,
+  GSID_OPTIONS,
+  GSID_GAME
 };
 
 class GameState {
 private:
-	const GameStateID m_gameStateID;
+  const GameStateID gameStateID;
+  bool hasNext;
+  GameStateID nextGameStateID;
+
+protected:
+  void setNextGameStateID(GameStateID id) {
+    hasNext = true;
+    nextGameStateID = id;
+  }
 
 public:
-	GameState(GameStateID id) : m_gameStateID(id) { }
-	virtual ~GameState() { }
+  GameState(GameStateID id) : gameStateID(id), hasNext(false), nextGameStateID(GSID_NONE) { }
+  virtual ~GameState() { }
 
-	virtual void update(sf::Time& time) = 0;
-	virtual void render(sf::Time& time) = 0;
+  virtual void update(sf::Time& time) = 0;
+  virtual void render(sf::Time& time) = 0;
 
-	GameStateID getGameStateID() const {
-		return m_gameStateID;
-	}
+  GameStateID getGameStateID() const {
+    return gameStateID;
+  }
+
+  bool hasNextState() const {
+    return hasNext;
+  }
+
+  GameStateID getNextGameStateID() const {
+    return nextGameStateID;
+  }
 };

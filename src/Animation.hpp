@@ -4,11 +4,12 @@
 
 class Animation : public sf::Sprite {
 private:
-	sf::IntRect* m_Frames;
-	int m_NumFrames;
-	float m_Speed;
-	float m_CurrentFrame;
-	bool m_Looped;
+  sf::IntRect* m_Frames;
+  int m_NumFrames;
+  float m_Speed;
+  int currentFrame;
+  float nextFrameIndex;
+  bool m_Looped;
 
 public:
 	Animation(const std::string filename, int numFrames, int frameWidth, int frameHeight, float speed = 0.0f);
