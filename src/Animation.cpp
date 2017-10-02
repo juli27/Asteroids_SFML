@@ -1,89 +1,80 @@
 #include "Animation.hpp"
 
-Animation::Animation(const std::string filename, int numFrames, int frameWidth, int frameHeight, float speed)
-	: m_NumFrames(numFrames),
-		m_Speed(speed),
-    currentFrame(0),
-		nextFrameIndex(0.0f),
-		m_Looped(true) {
-	sf::Texture* tex = new sf::Texture();
-	tex->loadFromFile(filename);
-	setTexture(*tex);
+Animation::Animation(const std::string filename, const int numFrames, const int frameWidth,
+  const int frameHeight, const float speed, const bool looped)
+    : m_numFrames(numFrames),
+      m_speed(speed),
+      m_currentFrameIndex(0),
+      m_nextFrameIndex(0.0f),
+      m_looped(looped) {
+  sf::Texture* tex = new sf::Texture();
+  tex->loadFromFile(filename);
+  setTexture(*tex);
 
-	m_Frames = new sf::IntRect[numFrames];
+  m_frames = new sf::IntRect[numFrames];
 
-	int framesX = tex->getSize().x / frameWidth;
+  int framesX = tex->getSize().x / frameWidth;
 
-	for (int i = 0; i < numFrames; ++i) {
-		int colomn = i % framesX;
-		int row = i / framesX;
-		m_Frames[i].left = colomn * frameWidth;
-		m_Frames[i].top = row * frameHeight;
-		
-		m_Frames[i].width = frameWidth;
-		m_Frames[i].height = frameHeight;
-	}
+  for (int i = 0; i < numFrames; ++i) {
+    int colomn = i % framesX;
+    int row = i / framesX;
+    m_frames[i].left = colomn * frameWidth;
+    m_frames[i].top = row * frameHeight;
 
-  setTextureRect(m_Frames[currentFrame]);
+    m_frames[i].width = frameWidth;
+    m_frames[i].height = frameHeight;
+  }
+
+  setTextureRect(m_frames[m_currentFrameIndex]);
 }
 
 Animation::~Animation() {
-	delete getTexture();
-	delete[] m_Frames;
+  delete[] m_frames;
+  delete getTexture();
 }
 
 void Animation::update(sf::Time& time) {
-	nextFrameIndex += m_Speed * time.asSeconds();
+  if (m_speed == 0.0f) {
+    return;
+  }
 
-	if (nextFrameIndex >= m_NumFrames) {
-		if (m_Looped) {
-			nextFrameIndex = 0.0f;
-		}
-		else {
-			nextFrameIndex = m_NumFrames - 1.0f;
-		}
-	}
-	else if (nextFrameIndex < 0) {
-		if (m_Looped) {
-			nextFrameIndex = m_NumFrames - 1.0f;
-		}
-		else {
-			nextFrameIndex = 0.0f;
-		}
-	}
+  m_nextFrameIndex += m_speed * time.asSeconds();
 
-  //TODO hmm. does this work reliably with float?
-  if (currentFrame != std::floor(nextFrameIndex)) {
-    currentFrame = static_cast<int> (nextFrameIndex);
-    setTextureRect(m_Frames[currentFrame]);
+  if (m_nextFrameIndex >= m_numFrames) {
+    if (m_looped) {
+      m_nextFrameIndex = 0.0f;
+    }
+    else {
+      m_nextFrameIndex = m_numFrames - 1.0f;
+      m_speed = 0.0f;
+    }
+  }
+  else if (m_nextFrameIndex < 0) {
+    if (m_looped) {
+      m_nextFrameIndex = m_numFrames - 1.0f;
+    }
+    else {
+      m_nextFrameIndex = 0.0f;
+      m_speed = 0.0f;
+    }
+  }
+
+  if (m_currentFrameIndex != std::floor(m_nextFrameIndex)) {
+    m_currentFrameIndex = static_cast<int> (m_nextFrameIndex);
+    setTextureRect(m_frames[m_currentFrameIndex]);
   }
 }
 
-void Animation::setSpeed(float speedFactor) {
-	m_Speed = speedFactor;
+void Animation::setSpeed(const float speedFactor) {
+  m_speed = speedFactor;
 }
 
-void Animation::setFrame(int frame) {
-	nextFrameIndex = static_cast<float> (frame);
-	setTextureRect(m_Frames[static_cast<int> (nextFrameIndex)]);
-}
-
-void Animation::setLooped(bool looped) {
-	m_Looped = looped;
-}
-
-float Animation::getSpeed() const {
-	return m_Speed;
+void Animation::setFrame(const int frame) {
+  m_currentFrameIndex = frame;
+  m_nextFrameIndex = static_cast<float> (frame);
+  setTextureRect(m_frames[frame]);
 }
 
 int Animation::getFrame() const {
-	return static_cast<int> (nextFrameIndex);
-}
-
-bool Animation::isLooped() const {
-	return m_Looped;
-}
-
-sf::IntRect Animation::getCollisionRect() const {
-	return sf::IntRect(getGlobalBounds());
+  return m_currentFrameIndex;
 }

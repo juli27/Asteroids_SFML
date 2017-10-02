@@ -1,28 +1,28 @@
 #pragma once
 
+#include <string>
+
 #include <SFML\Graphics.hpp>
+#include <SFML\System.hpp>
 
 class Animation : public sf::Sprite {
 private:
-  sf::IntRect* m_Frames;
-  int m_NumFrames;
-  float m_Speed;
-  int currentFrame;
-  float nextFrameIndex;
-  bool m_Looped;
+  sf::IntRect* m_frames;
+  const int m_numFrames;
+  float m_speed;
+  int m_currentFrameIndex;
+  float m_nextFrameIndex;
+  bool m_looped;
 
 public:
-	Animation(const std::string filename, int numFrames, int frameWidth, int frameHeight, float speed = 0.0f);
-	virtual ~Animation();
+  Animation(const std::string filename, const int numFrames, const int frameWidth,
+    const int frameHeight, const float speed = 0.0f, const bool looped = true);
+  virtual ~Animation();
 
-	void update(sf::Time& time);
+  void update(sf::Time& time);
 
-	void setSpeed(float speedFactor);
-	void setFrame(int frame);
-	void setLooped(bool looped);
+  void setSpeed(const float speedFactor);
+  void setFrame(int frame);
 
-	float getSpeed() const;
-	int getFrame() const;
-	bool isLooped() const;
-	sf::IntRect getCollisionRect() const;
+  int getFrame() const;
 };

@@ -1,22 +1,14 @@
 #include "MenuEntry.hpp"
 
-MenuEntry::MenuEntry(sf::String text, float x, float y) : m_Text(text) {
-  m_Font.loadFromFile("data/AGENCYR.TTF");
-
-  m_Entry.setString(m_Text);
-  m_Entry.setPosition(x, y);
-  m_Entry.setFont(m_Font);
-  m_Entry.setCharacterSize(100);
+MenuEntry::MenuEntry(const sf::String& text, const sf::Font& font, const float x, const float y)
+  : m_text(text, font, 100u) {
+  m_text.setPosition(x, y);
 }
 
-MenuEntry::~MenuEntry() {
-
+void MenuEntry::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+  target.draw(m_text);
 }
 
-sf::Vector2f MenuEntry::getPosition() const {
-	return m_Entry.getPosition();
-}
-
-void MenuEntry::Render(sf::RenderWindow &Window) {
-	Window.draw(m_Entry);
+const sf::Vector2f& MenuEntry::getPosition() const {
+  return m_text.getPosition();
 }

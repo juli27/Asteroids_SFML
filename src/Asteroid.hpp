@@ -4,15 +4,15 @@
 
 class Asteroid : public Animation {
 private:
-	bool m_Alive;
+  bool m_alive;
 
 public:
-	Asteroid(sf::Vector2f& position);
-	virtual ~Asteroid();
+  Asteroid(sf::Vector2f& position);
+  virtual ~Asteroid();
 
-	void update(sf::Time& time);
+  void update(sf::Time& time);
 
-	void setAlive(bool Alive);
-	bool isAlive() const;
-	sf::IntRect getCollisionRect() const;
+  void setAlive(bool alive);
+  bool isAlive() const;
+  sf::IntRect getCollisionRect() const;
 };

@@ -1,16 +1,15 @@
 #include "Projectile.hpp"
 
-sf::Texture* Projectile::m_Tex;
+sf::Texture* Projectile::texture = nullptr;
 
-Projectile::Projectile(sf::Vector2f& pos)
-	: m_Alive(true) {
-	if (!m_Tex) {
-		m_Tex = new sf::Texture();
-		m_Tex->loadFromFile("data/Laser.png");
-	}
+Projectile::Projectile(sf::Vector2f& pos) : m_alive(true) {
+  if (!texture) {
+    texture = new sf::Texture();
+    texture->loadFromFile("data/Laser.png");
+  }
 
-	setTexture(*m_Tex);
-	setPosition(pos);
+  setTexture(*texture);
+  setPosition(pos);
 }
 
 Projectile::~Projectile() {
@@ -18,20 +17,21 @@ Projectile::~Projectile() {
 }
 
 void Projectile::update(sf::Time& time) {
-	setPosition(getPosition().x, getPosition().y - 400.0f * time.asSeconds());
+  setPosition(getPosition().x, getPosition().y - 400.0f * time.asSeconds());
 
-	if (getPosition().y < -20.0f)
-		m_Alive = false;
+  if (getPosition().y < -20.0f) {
+    m_alive = false;
+  }
 }
 
 bool Projectile::isAlive() const {
-	return m_Alive;
+  return m_alive;
 }
 
 void Projectile::setAlive(bool alive) {
-	m_Alive = alive;
+  m_alive = alive;
 }
 
 sf::IntRect Projectile::getCollisionRect() const {
-	return sf::IntRect(getGlobalBounds());
+  return sf::IntRect(getGlobalBounds());
 }

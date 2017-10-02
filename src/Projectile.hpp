@@ -4,17 +4,17 @@
 
 class Projectile : public sf::Sprite {
 private:
-	bool m_Alive;
+  bool m_alive;
 
-	static sf::Texture* m_Tex;
+  static sf::Texture* texture;
 
 public:
-	Projectile(sf::Vector2f& pos);
-	virtual ~Projectile();
+  Projectile(sf::Vector2f& pos);
+  virtual ~Projectile();
 
-	void update(sf::Time& time);
+  void update(sf::Time& time);
 
-	void setAlive(bool alive);
-	bool isAlive() const;
-	sf::IntRect getCollisionRect() const;
+  void setAlive(bool alive);
+  bool isAlive() const;
+  sf::IntRect getCollisionRect() const;
 };

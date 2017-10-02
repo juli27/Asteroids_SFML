@@ -1,16 +1,14 @@
 #pragma once
 
-#include "SFML\Graphics.hpp"
+#include <SFML\Graphics.hpp>
 
-class MenuEntry {
+class MenuEntry : public sf::Drawable {
 private:
-  sf::String m_Text;
-  sf::Font m_Font;
-  sf::Text m_Entry;
+  sf::Text m_text;
+
+  virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 public:
-  MenuEntry(sf::String text, float x, float y);
-  ~MenuEntry();
-  sf::Vector2f getPosition() const;
-  void Render(sf::RenderWindow &Window);
+  MenuEntry(const sf::String& text, const sf::Font& font, const float x, const float y);
+  const sf::Vector2f& getPosition() const;
 };

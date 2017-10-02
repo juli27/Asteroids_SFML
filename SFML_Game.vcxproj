@@ -89,9 +89,7 @@
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\Asteroid.cpp" />
     <ClCompile Include="src\Application.cpp" />
-    <ClCompile Include="src\Explosion.cpp" />
     <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\GameStateManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MainMenu.cpp" />
     <ClCompile Include="src\MenuEntry.cpp" />
@@ -103,11 +101,9 @@
     <ClInclude Include="src\Animation.hpp" />
     <ClInclude Include="src\Asteroid.hpp" />
     <ClInclude Include="src\Application.hpp" />
-    <ClInclude Include="src\Explosion.hpp" />
     <ClInclude Include="src\Game.hpp" />
     <ClInclude Include="src\GameOver.hpp" />
     <ClInclude Include="src\GameState.hpp" />
-    <ClInclude Include="src\GameStateManager.hpp" />
     <ClInclude Include="src\MainMenu.hpp" />
     <ClInclude Include="src\MenuEntry.hpp" />
     <ClInclude Include="src\Options.hpp" />

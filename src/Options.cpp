@@ -1,10 +1,9 @@
 #include "Options.hpp"
 
-Options::Options(sf::RenderWindow &window, const sf::Font* font) : GameState(GSID_OPTIONS),
-    m_Window(window),
+Options::Options(sf::RenderWindow &window, const sf::Font& font) : GameState(GSID_OPTIONS, window),
     m_KeyLock(true),
-    m_VSync("VSync: off", *font),
-    m_Instructions("\n\nPress Enter to change the setting - Press Esc to return to the menu", *font),
+    m_VSync("VSync: off", font),
+    m_Instructions("\n\nPress Enter to change the setting - Press Esc to return to the menu", font),
     m_VSyncEnabled(false) {
   if (m_VSyncEnabled) {
     m_VSync.setString("VSync: on");
@@ -34,7 +33,7 @@ void Options::update(sf::Time& time) {
       m_VSync.setString("VSync: on");
     }
 
-    m_Window.setVerticalSyncEnabled(m_VSyncEnabled);
+    m_window.setVerticalSyncEnabled(m_VSyncEnabled);
     m_KeyLock = true;
   }
 
@@ -43,7 +42,7 @@ void Options::update(sf::Time& time) {
   }
 }
 
-void Options::render(sf::Time& time) {
-  m_Window.draw(m_VSync);
-  m_Window.draw(m_Instructions);
+void Options::render() {
+  m_window.draw(m_VSync);
+  m_window.draw(m_Instructions);
 }

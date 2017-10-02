@@ -3,29 +3,27 @@
 #include <SFML\Graphics.hpp>
 
 #include "Asteroid.hpp"
-#include "Explosion.hpp"
 #include "GameState.hpp"
 #include "Player.hpp"
 
 class Game : public GameState {
 private:
-	sf::RenderWindow &m_Window;
-	Player m_Player;
-	Animation *m_Explosion;
-	std::list<Asteroid> m_Asteroids;
-	std::list<Explosion> m_Explosions;
-	float m_AsteroidTimer;
-	int m_Points;
+  Player m_player;
+  Animation m_explosion;
+  std::list<Asteroid> m_asteroids;
+  std::list<Animation> m_effects;
+  float m_asteroidTimer;
+  int m_score;
 
-	void updateAsteroids(sf::Time& time);
-	void UpdateEffects(sf::Time Time);
-	void renderAsteroids();
-	void RenderEffects();
-	void CheckCollisions();
+  void updateAsteroids(sf::Time& time);
+  void updateEffects(sf::Time& time);
+  void checkCollisions();
+  void renderAsteroids();
+  void renderEffects();
 
 public:
-	Game(sf::RenderWindow &window, const sf::Font* font);
-	~Game();
-	void update(sf::Time& time);
-	void render(sf::Time& time);
+  Game(sf::RenderWindow& window, const sf::Font& font);
+  ~Game();
+  void update(sf::Time& time);
+  void render();
 };

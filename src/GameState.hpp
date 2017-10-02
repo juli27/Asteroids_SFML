@@ -1,5 +1,8 @@
 #pragma once
 
+//TODO replace with forward declaration ?
+#include <SFML\System\Time.hpp>
+
 enum GameStateID {
   GSID_NONE,
   GSID_MAINMENU,
@@ -9,32 +12,35 @@ enum GameStateID {
 
 class GameState {
 private:
-  const GameStateID gameStateID;
-  bool hasNext;
-  GameStateID nextGameStateID;
+  const GameStateID m_gameStateID;
+  bool m_hasNext;
+  GameStateID m_nextGameStateID;
 
 protected:
+  sf::RenderWindow& m_window;
+
   void setNextGameStateID(GameStateID id) {
-    hasNext = true;
-    nextGameStateID = id;
+    m_hasNext = true;
+    m_nextGameStateID = id;
   }
 
 public:
-  GameState(GameStateID id) : gameStateID(id), hasNext(false), nextGameStateID(GSID_NONE) { }
+  GameState(GameStateID id, sf::RenderWindow& window) : m_gameStateID(id), m_window(window),
+    m_hasNext(false), m_nextGameStateID(GSID_NONE) { }
   virtual ~GameState() { }
 
   virtual void update(sf::Time& time) = 0;
-  virtual void render(sf::Time& time) = 0;
+  virtual void render() = 0;
 
   GameStateID getGameStateID() const {
-    return gameStateID;
+    return m_gameStateID;
   }
 
   bool hasNextState() const {
-    return hasNext;
+    return m_hasNext;
   }
 
   GameStateID getNextGameStateID() const {
-    return nextGameStateID;
+    return m_nextGameStateID;
   }
 };

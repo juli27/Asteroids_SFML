@@ -16,17 +16,15 @@ enum MenuEntryID {
 
 class MainMenu : public GameState {
 private:
-  sf::RenderWindow &m_Window;
-  Animation m_Cursor;
-  sf::Text m_Copyright;
-  std::vector<MenuEntry*> entries;
-  MenuEntryID activeEntry;
-  bool keyLock;
+  Animation m_cursor;
+  std::vector<MenuEntry> m_entries;
+  sf::Text m_copyright;
+  MenuEntryID m_activeEntry;
+  bool m_keyLock;
 
 public:
-  MainMenu(sf::RenderWindow& window, const sf::Font* font);
-  ~MainMenu();
+  MainMenu(sf::RenderWindow& window, const sf::Font& font);
 
   void update(sf::Time& time);
-  void render(sf::Time& time);
+  void render();
 };
