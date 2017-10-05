@@ -6,6 +6,7 @@ MainMenu::MainMenu(sf::RenderWindow& window, const sf::Font& font)
       m_copyright("Julian Bühler 2013/2017", font, 20u),
       m_activeEntry(ME_START),
       m_keyLock(true) {
+  m_entries.reserve(3);
   m_entries.emplace_back("Start", font, 300.f, 200.f);
   m_entries.emplace_back("Options", font, 300.0f, 300.0f);
   m_entries.emplace_back("Quit", font, 300.0f, 400.0f);

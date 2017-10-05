@@ -1,5 +1,9 @@
 #include "Player.hpp"
 
+#ifdef _DEBUG
+#include <iostream>
+#endif // _DEBUG
+
 Player::Player(sf::RenderWindow& window)
     : m_Window(window),
       m_animation("data/Player.png", 11, 64, 64, 0.0f, false),
@@ -71,7 +75,9 @@ void Player::update(sf::Time& time) {
 }
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-  target.draw(m_animation, states);
+  if (m_alive) {
+    target.draw(m_animation, states);
+  }
 
   for (std::list<Projectile>::const_iterator it = m_projectiles.cbegin(); it != m_projectiles.end(); ++it) {
     target.draw(*it, states);

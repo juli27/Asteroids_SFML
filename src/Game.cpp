@@ -13,7 +13,7 @@ Game::Game(sf::RenderWindow& window, const sf::Font& font)
 
 Game::~Game() {
 #ifdef _DEBUG
-  std::cout << "Gesamtpunktzahl: " << m_score << std::endl;
+  std::cout << "Score: " << m_score << std::endl;
 #endif // _DEBUG
 }
 
@@ -106,20 +106,14 @@ void Game::update(sf::Time& time) {
   }
 }
 
-void Game::renderAsteroids() {
+void Game::render() {
+  m_window.draw(m_player);
+
   for (std::list<Asteroid>::const_iterator it = m_asteroids.cbegin(); it != m_asteroids.cend(); ++it) {
     m_window.draw(*it);
   }
-}
 
-void Game::renderEffects() {
-  for (std::list<Animation>::iterator it = m_effects.begin(); it != m_effects.end(); ++it) {
+  for (std::list<Animation>::const_iterator it = m_effects.cbegin(); it != m_effects.cend(); ++it) {
     m_window.draw(*it);
   }
-}
-
-void Game::render() {
-  m_window.draw(m_player);
-  renderAsteroids();
-  renderEffects();
 }

@@ -18,8 +18,6 @@ private:
   void updateAsteroids(sf::Time& time);
   void updateEffects(sf::Time& time);
   void checkCollisions();
-  void renderAsteroids();
-  void renderEffects();
 
 public:
   Game(sf::RenderWindow& window, const sf::Font& font);

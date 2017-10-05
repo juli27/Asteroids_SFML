@@ -16,6 +16,8 @@ private:
   bool m_hasNext;
   GameStateID m_nextGameStateID;
 
+  // ResourceManager/loader as static member, call switch state on GameState ctor
+
 protected:
   sf::RenderWindow& m_window;
 

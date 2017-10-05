@@ -55,6 +55,10 @@ void Application::run() {
 
     // polling every frame is bad :(
     if (currentGameState->hasNextState()) {
+      // with a loading screen: switch to loading screen state and pass the new state ID to a
+      // function of the loading screen state and let it construct the new state in another thread
+      // and return the new state somehow (...) when finished
+
       GameState* nextGameState = nullptr;
 
       switch (currentGameState->getNextGameStateID()) {

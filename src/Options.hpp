@@ -6,10 +6,11 @@
 
 class Options : public GameState {
 private:
-  sf::Text m_VSync;
-  sf::Text m_Instructions;
-  bool m_VSyncEnabled;
-  bool m_KeyLock;
+  sf::Text m_vSync;
+  sf::Text m_instructions;
+  bool m_keyLock;
+
+  static bool vSyncEnabled;
 
 public:
   Options(sf::RenderWindow &window, const sf::Font& font);
