@@ -12,6 +12,7 @@
 
 void Application::run() {
   sf::RenderWindow window(sf::VideoMode(800, 600), "Asteroids", sf::Style::Close);
+  window.setVerticalSyncEnabled(true);
 
   sf::Texture backgroundTexture;
   backgroundTexture.loadFromFile("data/Background.png");
@@ -24,7 +25,10 @@ void Application::run() {
   sf::Time elapsedTimed;
   sf::Clock clock;
   const float fpsUpdateInterval = 0.5f;
-  float fpsUpdateTimer = 0.0f;
+  float fpsUpdateTimer = fpsUpdateInterval;
+  std::string fpsString;
+  sf::String test;
+  fpsString.reserve(10);
 
   // initial GameState is the main menu
   GameState* currentGameState = new MainMenu(window, agencyFont);
@@ -48,7 +52,9 @@ void Application::run() {
     fpsUpdateTimer += elapsedTimed.asSeconds();
     if (fpsUpdateTimer >= fpsUpdateInterval) {
       int fps = static_cast<int> (1.0f / elapsedTimed.asSeconds());
-      fpsText.setString(std::to_string(fps));
+      fpsString.clear();
+      fpsString.append(std::to_string(fps)).append(" FPS");
+      fpsText.setString(fpsString);
 
       fpsUpdateTimer = 0.0f;
     }

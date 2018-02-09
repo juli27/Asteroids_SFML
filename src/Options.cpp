@@ -1,14 +1,14 @@
 #include "Options.hpp"
 
-bool Options::vSyncEnabled = false;
+bool Options::vSyncEnabled = true;
 
 Options::Options(sf::RenderWindow& window, const sf::Font& font)
     : GameState(GSID_OPTIONS, window),
-      m_vSync("VSync: off", font),
+      m_vSync("VSync: on", font),
       m_instructions("Press Enter to change the setting or Esc to return to the menu", font),
       m_keyLock(true) {
-  if (vSyncEnabled) {
-    m_vSync.setString("VSync: on");
+  if (!vSyncEnabled) {
+    m_vSync.setString("VSync: off");
   }
 
   m_vSync.setPosition(300.0f, 200.0f);

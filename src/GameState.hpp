@@ -2,6 +2,9 @@
 
 //TODO replace with forward declaration ?
 #include <SFML\System\Time.hpp>
+#include <SFML\Graphics\RenderWindow.hpp>
+
+class ResourceManager;
 
 enum GameStateID {
   GSID_NONE,
@@ -17,6 +20,7 @@ private:
   GameStateID m_nextGameStateID;
 
   // ResourceManager/loader as static member, call switch state on GameState ctor
+  static ResourceManager resManager;
 
 protected:
   sf::RenderWindow& m_window;

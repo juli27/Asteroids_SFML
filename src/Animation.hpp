@@ -15,6 +15,7 @@ private:
   bool m_looped;
 
 public:
+  /// <summary><c>Contructor</c> This is a test</summary>
   Animation(const std::string filename, const int numFrames, const int frameWidth,
     const int frameHeight, const float speed = 0.0f, const bool looped = true);
   virtual ~Animation();

@@ -23,7 +23,8 @@ void Game::updateAsteroids(sf::Time& time) {
 
     if (m_asteroidTimer >= 0.5f) {
       //TODO: rand() is bad
-      m_asteroids.emplace_back(sf::Vector2f(static_cast<float> (rand() % 736), -60.0f));
+      const sf::Vector2f asteroisPos(static_cast<float> (rand() % 736), -60.0f);
+      m_asteroids.emplace_back(asteroisPos);
 
       m_asteroidTimer = 0.0f;
     }

@@ -1,13 +1,11 @@
 #include "Asteroid.hpp"
 
 //TODO: a new Animation (and therefore a newtexture) for every Asteroid is bad :(
-Asteroid::Asteroid(sf::Vector2f& position)
+Asteroid::Asteroid(const sf::Vector2f& position)
     : Animation("data/Asteroid.png", 20, 64, 64, 10.0f),
       m_alive(true) {
   setPosition(position);
 }
-
-Asteroid::~Asteroid() { }
 
 void Asteroid::update(sf::Time& time) {
   Animation::update(time);

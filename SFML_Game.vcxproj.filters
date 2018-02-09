@@ -81,6 +81,9 @@
     <ClCompile Include="src\ui\UIComponent.cpp">
       <Filter>Source Files\ui</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Animation.hpp">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="src\ui\UIRoot.hpp">
       <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ResourceManager.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

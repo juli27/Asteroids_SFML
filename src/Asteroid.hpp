@@ -7,8 +7,7 @@ private:
   bool m_alive;
 
 public:
-  Asteroid(sf::Vector2f& position);
-  virtual ~Asteroid();
+  Asteroid(const sf::Vector2f& position);
 
   void update(sf::Time& time);
 
